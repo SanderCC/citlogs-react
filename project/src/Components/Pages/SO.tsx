@@ -27,9 +27,9 @@ export default function SO() {
         <TextField value={input} sx={{width: "100%", m: 1}} rows={7} multiline onChange={e => setInput(e.target.value)}/>
         <Button color={"warning"} onClick={async () => setInput(await clipboard.get())}>Paste clipboard</Button>
         <Button onClick={parseClipboard}>Parse clipboard</Button>
-        <Button onClick={executeDivider}>Parse</Button>
-        <Button onClick={() => clipboard.put(format)}>Copy Format</Button>
+        <Button sx={{ml: 10}} onClick={executeDivider}>Parse</Button>
         <TextField sx={{width: "100%", m: 1}} multiline value={format} />
+        <Button onClick={() => clipboard.put(format)}>Copy Format</Button>
         <Grid container>
             <Grid item xs={4}>
                 <ContentArea title={"Team"} content={divider.team} />
