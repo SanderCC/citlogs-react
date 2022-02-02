@@ -1,6 +1,6 @@
 import {Button, Grid, TextField, Typography} from "@mui/material";
 import {useState} from "react";
-import {useDivider} from "../../Functions/Dividers/SODivider";
+import {useDivider} from "../../Functions/Dividers/soDivider";
 import {useClipboard} from "../../Functions/Hooks/Clipboard";
 import {ContentArea} from "../Particles/ContentArea";
 import {numberWithCommas} from "../../Functions/number";
