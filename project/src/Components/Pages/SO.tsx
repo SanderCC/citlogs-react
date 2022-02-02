@@ -29,7 +29,7 @@ export default function SO() {
         <Button onClick={parseClipboard}>Parse clipboard</Button>
         <Button sx={{ml: 10}} onClick={executeDivider}>Parse</Button>
         <TextField sx={{width: "100%", m: 1}} multiline value={format} />
-        <Button onClick={() => clipboard.put(format)}>Copy Format</Button>
+        <Button color={"secondary"} onClick={() => clipboard.put(format)}>Copy Format</Button>
         <Grid container>
             <Grid item xs={4}>
                 <ContentArea title={"Team"} content={divider.team} />
