@@ -1,5 +1,12 @@
 import {useState} from "react";
 import soReviewFormat from "../Formats/SoReviewFormat";
+import {
+    getAccountFromArray,
+    getFirstLoginPlayTime,
+    getLastLogoutPlayTime,
+    getNickFromArray,
+    getPlaytimeFromArray
+} from "./getBasicLogInfo";
 
 let tempLogin : string[] = []
 let tempLoginMisc : string[] = []
@@ -76,51 +83,4 @@ function resetArrays() {
     tempQuizzes = []
     tempEvents = []
     tempTeam = []
-}
-
-function getFirstLoginPlayTime(loginMisc:string[]) : number {
-    let pattern = "PlayTime: ([0-9]+) "
-    if(loginMisc.length === 0) return 0
-    let first = loginMisc[0].match(pattern)
-    if(first == null){
-        console.log("Could not calculate playtime, regex is null")
-        return -1
-    }
-    return Number.parseInt(first[0].replace("PlayTime:", "").replaceAll(" ", ""))
-}
-
-function getLastLogoutPlayTime(quitMisc:string[]) : number {
-    let pattern = "PlayTime: ([0-9]+) "
-    if(quitMisc.length === 0) return 0
-    let last = quitMisc[quitMisc.length-1].match(pattern)
-    if(last == null){
-        console.log("Could not calculate playtime, regex is null")
-        return -1
-    }
-    return Number.parseInt(last[0].replace("PlayTime:", "").replaceAll(" ", ""))
-}
-
-function getPlaytimeFromArray(loginMisc:string[], quitMisc:string[]) : number {
-    try {
-        return Math.round((getLastLogoutPlayTime(quitMisc) - getFirstLoginPlayTime(loginMisc))/60)
-    } catch(e:any) {
-        return -1
-    }
-}
-
-function getAccountFromArray(login:string[]) : string {
-    if(login.length === 0) return "NOT_FOUND"
-    const output = login[0].match(" LOGIN: (.*) logged into by")
-    if(output === null) return "NOT_FOUND"
-    return output[0].replace(" LOGIN: ", "").replace(" logged into by", "")
-}
-
-function getNickFromArray(teamChat:string[]) : string {
-    if(teamChat.length === 0) return "NOT_FOUND"
-    const output = teamChat[0].match("TC: [Civilian Workers] (.*): ")
-    if(output === null){
-        console.log("Output for Nick is null")
-        return "NOT_FOUND"
-    }
-    return output[0].replace("TC: [Civilian Workers]", "").replace(": ", "").replaceAll(" ", "")
 }
