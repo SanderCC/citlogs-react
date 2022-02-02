@@ -40,6 +40,7 @@ export function useDivider() {
         setLoading(false)
     }
 
+
     function allActivities() : string[] {
         return [...quizzes, ...events]
     }

@@ -28,9 +28,9 @@ export function getPlaytimeFromArray(loginMisc:string[], quitMisc:string[]) : nu
     }
 }
 
-export function getAccountFromArray(loginLogs:string[]) : string {
-    if(loginLogs.length === 0) return "NOT_FOUND"
-    const output = loginLogs[0].match(" LOGIN: (.*) logged into by")
+export function getAccountFromArray(logs:string[]) : string {
+    if(logs.length === 0) return "NOT_FOUND"
+    const output = logs[0].match(" LOGIN: (.*) logged into by")
     if(output === null) return "NOT_FOUND"
     return output[0].replace(" LOGIN: ", "").replace(" logged into by", "")
 }
