@@ -1,4 +1,5 @@
 import {useState} from "react";
+import soReviewFormat from "../Formats/SoReviewFormat";
 
 let tempLogin : string[] = []
 let tempLoginMisc : string[] = []
@@ -52,7 +53,11 @@ export function useDivider() {
         return getAccountFromArray(login)
     }
 
-    return {execute, loading, quizzes, team, events, allActivities, getPlaytime, getNick, getAccount}
+    function getFormat() : string {
+        return soReviewFormat(getNick(), getAccount(), events.length, quizzes.length, team.length, getPlaytime())
+    }
+
+    return {execute, loading, quizzes, team, events, allActivities, getPlaytime, getNick, getAccount, getFormat}
 }
 
 function assignLine(line:string) {
