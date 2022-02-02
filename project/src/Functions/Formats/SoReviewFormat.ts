@@ -5,7 +5,7 @@ export default function soReviewFormat(nick:string, account:string, eventCount:n
     result += `\n[b]Hours played: [/b](${playtime.end}-${playtime.start})/60= ${playtime.calculated}h`
     result += `\n[b]TC Hits: [/b]${chatCount}`
     result += `\n[b]Event hits: [/b]${eventCount+quizCount} (${quizCount} quizzes + ${eventCount} events)`
-    result += `\n[b]Advice: [/b]${getAdvice(eventCount+quizCount, chatCount, playtime.calculated)}`
+    result += `\n[b]Issues: [/b]${getAdvice(eventCount+quizCount, chatCount, playtime.calculated)}`
 
     return result
 }
