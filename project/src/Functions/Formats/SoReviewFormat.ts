@@ -23,8 +23,8 @@ function getAdvice(activityCount:number, chatCount:number, playtime:number) : st
 function getStrikes(activityCount:number, chatCount:number, playtime:number) : number {
     let strikes = 0
     if(activityCount < 15) strikes++
-    if(chatCount < 70) strikes++
-    if(playtime < 28) strikes++
+    if(chatCount < 69) strikes++
+    if(playtime < 29) strikes++
     return strikes
 }
 
