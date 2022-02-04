@@ -30,7 +30,7 @@ export default function adminReviewFormat(nick:string,
     result += `\n[b]Contact Admin:[/b] ${cad}`
     result += `\n[b]Reports:[/b] ${cm} [CM] actions taken.`
     result += `\n[b]Abuse:[/b] TO_BE_FILLED_IN`
-    result += `\n[b]Duty related actions:[/b] ${dutyRelated}`
+    result += `\n[b]Duty related actions:[/b] ${dutyRelated} <AND CHECK FORUM>`
     result += `\n\n[i]Additional notes:[/i] ${notes.message}`
     result += `\n\n[hr]`
     return result
