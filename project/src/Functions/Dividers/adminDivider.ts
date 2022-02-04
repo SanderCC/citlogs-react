@@ -6,7 +6,6 @@ import {
     getNickFromArray,
     getPlaytimeFromArray
 } from "./getBasicLogInfo";
-import adminReviewFormat from "../Formats/adminReviewFormat";
 
 let tempLogin : string[] = []
 let tempLoginMisc : string[] = []
@@ -21,6 +20,7 @@ let tempCad : string[] = []
 let tempSup : string[] = []
 let tempAbuse : string[] = []
 let tempDutyRelated : string[] = []
+let tempStaffWarps : string[] = []
 
 export function useDivider() {
     const [loading, setLoading] = useState(false)
@@ -36,6 +36,7 @@ export function useDivider() {
     const [cad, setCad] = useState<string[]>([])
     const [sup, setSup] = useState<string[]>([])
     const [abuse, setAbuse] = useState<string[]>([])
+    const [staffWarps, setStaffWarps] = useState<string[]>([])
     const [dutyRelated, setDutyRelated] = useState<string[]>([])
 
     function execute(input : string) {
@@ -58,6 +59,7 @@ export function useDivider() {
         setSup(tempSup)
         setAbuse(tempAbuse)
         setDutyRelated(tempDutyRelated)
+        setStaffWarps(tempStaffWarps)
         setLoading(false)
     }
 
@@ -70,23 +72,18 @@ export function useDivider() {
     }
 
     function getNick() {
-        return getNickFromArray(citc)
+        return getNickFromArray(login)
     }
 
     function getAccount() : string {
         return getAccountFromArray(login)
     }
 
-    function getFormat() : string {
-        return adminReviewFormat(
-            getNick(), getAccount(), getPlaytime(),
-            loginMisc.length, jails.length, mutes.length,
-            bans.length, citc.length, cad.length, cm.length,
-            logsFetched.length, dutyRelated.length
-            )
+    function getRank() : string {
+        return getAdminRank(staffWarps)
     }
 
-    return {execute, loading, getPlaytime, getNick, getAccount, getFormat, bans, jails, mutes, logsFetched, cm, cad, sup, abuse, dutyRelated, citc}
+    return {execute, loading, getPlaytime, getNick, getAccount, loginMisc, bans, jails, mutes, logsFetched, cm, cad, sup, abuse, dutyRelated, citc, getRank}
 }
 
 function assignLine(line:string) {
@@ -108,6 +105,7 @@ function assignLine(line:string) {
 
     if(line.includes("warped to ")) {
         if(!line.includes("WL: 0") && !line.includes("with 0 stars") && !line.includes("(EM)")) tempAbuse.push(line)
+        if(line.includes(" Staff WL: ")) tempStaffWarps.push(line)
     }
     if(line.toLowerCase().includes(" abuse ")) tempAbuse.push(line)
     if(line.toLowerCase().includes(" recommendation ")) tempAbuse.push(line)
@@ -125,6 +123,15 @@ function assignLine(line:string) {
     if(line.includes("zone 0 p")) tempDutyRelated.push(line)
 }
 
+function getAdminRank(staffWarps:string[]) : string {
+    if(staffWarps.filter(l => l.includes("L5 Staff")).length > 0) return "L5"
+    if(staffWarps.filter(l => l.includes("L4 Staff")).length > 0) return "L4"
+    if(staffWarps.filter(l => l.includes("L3 Staff")).length > 0) return "L3"
+    if(staffWarps.filter(l => l.includes("L2 Staff")).length > 0) return "L2"
+    if(staffWarps.filter(l => l.includes("L1 Staff")).length > 0) return "L1"
+    return "L<?>"
+}
+
 function resetArrays() {
     tempLogin = []
     tempLoginMisc = []
@@ -139,4 +146,5 @@ function resetArrays() {
     tempSup = []
     tempAbuse = []
     tempDutyRelated = []
+    tempStaffWarps = []
 }

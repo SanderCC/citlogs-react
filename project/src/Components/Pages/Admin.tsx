@@ -4,11 +4,18 @@ import {useClipboard} from "../../Functions/Hooks/Clipboard";
 import {ContentArea} from "../Particles/ContentArea";
 import {numberWithCommas} from "../../Functions/number";
 import {useDivider} from "../../Functions/Dividers/adminDivider";
+import adminReviewFormat from "../../Functions/Formats/adminReviewFormat";
 
 export default function Admin() {
     const [input, setInput] = useState("")
     const divider = useDivider()
     const clipboard = useClipboard()
+    const format = adminReviewFormat(
+        divider.getNick(), divider.getAccount(), divider.getRank(), divider.getPlaytime(),
+        divider.loginMisc.length, divider.jails.length, divider.mutes.length,
+        divider.bans.length, divider.citc.length, divider.cad.length, divider.cm.length,
+        divider.logsFetched.length, divider.dutyRelated.length
+    )
 
     if(divider.loading) return <>Loading...</>
 
@@ -21,7 +28,7 @@ export default function Admin() {
     }
 
     async function pasteFormatToClipboard() {
-        await clipboard.put(divider.getFormat())
+        await clipboard.put(format)
     }
 
     return <>
@@ -30,7 +37,7 @@ export default function Admin() {
         <Button color={"warning"} onClick={async () => setInput(await clipboard.get())}>Paste clipboard</Button>
         <Button onClick={parseClipboard} sx={{mx: 5}}>Parse clipboard</Button>
         <Button color={"secondary"} onClick={executeDivider}>Parse input</Button>
-        <TextField sx={{width: "100%", m: 1}} multiline value={divider.getFormat()} />
+        <TextField sx={{width: "100%", m: 1}} multiline value={format} />
         <Button color={"success"} onClick={pasteFormatToClipboard}>Copy Format</Button>
         <Grid container>
             <Grid item xs={4}>

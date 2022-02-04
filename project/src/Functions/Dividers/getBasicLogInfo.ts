@@ -35,12 +35,18 @@ export function getAccountFromArray(logs:string[]) : string {
     return output[0].replace(" LOGIN: ", "").replace(" logged into by", "")
 }
 
-export function getNickFromArray(teamChat:string[]) : string {
-    if(teamChat.length === 0) return "NOT_FOUND"
-    const output = teamChat[0].match("TC: [Civilian Workers] (.*): ")
-    if(output === null){
-        console.log("Output for Nick is null")
-        return "NOT_FOUND"
-    }
-    return output[0].replace("TC: [Civilian Workers]", "").replace(": ", "").replaceAll(" ", "")
+export function getNickFromArray(logs:string[]) : string {
+    if(logs.length === 0) return "NOT_FOUND"
+    const output = logs[0].match("logged into by (.*) ([A-Z0-9]+) ")
+    if(output === null) return "NOT_FOUND"
+    let nickAndSerial = output[0].replace("logged into by", "")
+    return nickAndSerial.split(" ")[1]
+}
+
+export function getSerialFromArray(logs:string[]) : string {
+    if(logs.length === 0) return "NOT_FOUND"
+    const output = logs[0].match("logged into by (.*) ([A-Z0-9]+) ")
+    if(output === null) return "NOT_FOUND"
+    let nickAndSerial = output[0].replace("logged into by", "")
+    return nickAndSerial.split(" ")[2]
 }

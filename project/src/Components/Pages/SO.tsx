@@ -4,11 +4,13 @@ import {useDivider} from "../../Functions/Dividers/soDivider";
 import {useClipboard} from "../../Functions/Hooks/Clipboard";
 import {ContentArea} from "../Particles/ContentArea";
 import {numberWithCommas} from "../../Functions/number";
+import soReviewFormat from "../../Functions/Formats/SoReviewFormat";
 
 export default function SO() {
     const [input, setInput] = useState("")
     const divider = useDivider()
     const clipboard = useClipboard()
+    const format = soReviewFormat(divider.getNick(), divider.getAccount(), divider.events.length, divider.quizzes.length, divider.team.length, divider.getPlaytime())
 
     if(divider.loading) return <>Loading...</>
 
@@ -21,7 +23,7 @@ export default function SO() {
     }
 
     async function pasteFormatToClipboard() {
-        await clipboard.put(divider.getFormat())
+        await clipboard.put(format)
     }
 
     return <>
@@ -30,7 +32,7 @@ export default function SO() {
         <Button color={"warning"} onClick={async () => setInput(await clipboard.get())}>Paste clipboard</Button>
         <Button onClick={parseClipboard} sx={{mx: 5}}>Parse clipboard</Button>
         <Button color={"secondary"} onClick={executeDivider}>Parse input</Button>
-        <TextField sx={{width: "100%", m: 1}} multiline value={divider.getFormat()} />
+        <TextField sx={{width: "100%", m: 1}} multiline value={format} />
         <Button color={"success"} onClick={pasteFormatToClipboard}>Copy Format</Button>
         <Grid container>
             <Grid item xs={4}>

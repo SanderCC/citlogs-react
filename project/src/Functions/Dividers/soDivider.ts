@@ -1,5 +1,4 @@
 import {useState} from "react";
-import soReviewFormat from "../Formats/SoReviewFormat";
 import {
     getAccountFromArray,
     getFirstLoginPlayTime,
@@ -54,18 +53,14 @@ export function useDivider() {
     }
 
     function getNick() {
-        return getNickFromArray(team)
+        return getNickFromArray(login)
     }
 
     function getAccount() : string {
         return getAccountFromArray(login)
     }
 
-    function getFormat() : string {
-        return soReviewFormat(getNick(), getAccount(), events.length, quizzes.length, team.length, getPlaytime())
-    }
-
-    return {execute, loading, quizzes, team, events, allActivities, getPlaytime, getNick, getAccount, getFormat}
+    return {execute, loading, quizzes, team, events, allActivities, getPlaytime, getNick, getAccount}
 }
 
 function assignLine(line:string) {

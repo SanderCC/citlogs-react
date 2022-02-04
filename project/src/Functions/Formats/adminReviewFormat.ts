@@ -1,5 +1,6 @@
 export default function adminReviewFormat(nick:string,
                                           account:string,
+                                          rank:string,
                                           playtime:{start: number, end: number, calculated: number},
                                           logins:number,
                                           jails:number,
@@ -10,12 +11,13 @@ export default function adminReviewFormat(nick:string,
                                           cm:number,
                                           logsFetched:number,
                                           dutyRelated:number) {
+    const notes = feedback(bans, mutes, jails, cm, citc)
     let result = ""
-    result += `[center][size=13pt][b]Team <?>:[/b][/size][/center][br][br]`
-    result += `\n\nL<?>. [url=https://cit.gg/index.php?action=profile;u=FORUMCODE]${nick}[/url] (${account}):`
-    result += `\n[b]Name:[/b] ${nick}`
+    result += `[center][size=13pt][b]Team 2:[/b][/size][/center][br][hr]`
+    result += `\n\n${rank}. [url=https://cit.gg/index.php?action=profile;u=FORUMCODE]${nick}[/url] (${account}):`
+    result += `\n\n[b]Name: [color=${notes.color}]${nick}[/color][/b]`
     result += `\n[b]Account name:[/b] ${account}`
-    result += `\n[b]Rank:[/b] TO_BE_FILLED_IN`
+    result += `\n[b]Rank:[/b] ${rank}`
     result += `\n[b]Duties:[/b] TO_BE_FILLED_IN`
     result += `\n[b]Hours played:[/b] (${playtime.end}-${playtime.start})/60 = ${playtime.calculated}h`
     result += `\n[b]Login hits:[/b] ${logins}`
@@ -29,12 +31,12 @@ export default function adminReviewFormat(nick:string,
     result += `\n[b]Reports:[/b] ${cm} [CM] actions taken.`
     result += `\n[b]Abuse:[/b] TO_BE_FILLED_IN`
     result += `\n[b]Duty related actions:[/b] ${dutyRelated}`
-    result += `\n\n[i]Additional notes:[/i] ${feedback(bans, mutes, jails, cm, citc)}`
+    result += `\n\n[i]Additional notes:[/i] ${notes.message}`
     result += `\n\n[hr]`
     return result
 }
 
-function feedback(bans:number, mutes:number, jails:number, reports:number, citc:number) : string {
+function feedback(bans:number, mutes:number, jails:number, reports:number, citc:number) : { message:string, color:string } {
     let actionsCounter = 0;
     actionsCounter += bans * 1.3;
     actionsCounter += mutes;
@@ -43,13 +45,13 @@ function feedback(bans:number, mutes:number, jails:number, reports:number, citc:
     actionsCounter += citc * 0.2;
     if (actionsCounter < 30)
     {
-        return "Low in-game activity";
+        return {message: "Low in-game activity", color: "red"};
     }
 
     if (actionsCounter < 60)
     {
-        return "In-game activity is fine with room for improvement";
+        return {message: "In-game activity is fine with room for improvement", color: "orange"};
     }
 
-    return "Decent in-game activity";
+    return {message: "Decent in-game activity", color: "green"};
 }
