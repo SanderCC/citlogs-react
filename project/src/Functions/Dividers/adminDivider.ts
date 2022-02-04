@@ -105,7 +105,7 @@ function assignLine(line:string) {
 
     if(line.includes("warped to ")) {
         if(!line.includes("WL: 0") && !line.includes("with 0 stars") && !line.includes("(EM)")) tempAbuse.push(line)
-        if(line.includes(" Staff WL: ")) tempStaffWarps.push(line)
+        if(line.includes(" (Warp Map) ") && line.includes(" Staff WL: ")) tempStaffWarps.push(line)
     }
     if(line.toLowerCase().includes(" abuse ")) tempAbuse.push(line)
     if(line.toLowerCase().includes(" recommendation ")) tempAbuse.push(line)
