@@ -1,6 +1,7 @@
 import {Divider, IconButton, ListItem, List, SwipeableDrawer, Typography} from "@mui/material";
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from "react";
 import {Link} from "react-router-dom";
@@ -53,6 +54,10 @@ export default function LeftDrawer() {
                     <List>
                         <DetailedListItem title={"Home"} to={"/Home"}>
                             <HouseRounded />
+                        </DetailedListItem>
+                        <Divider />
+                        <DetailedListItem title={"Account Divider"} to={"/Parser/Account"}>
+                            <AccessibilityIcon />
                         </DetailedListItem>
                         <Divider />
                         <DetailedListItem title={"SO Review"} to={"/Parser/SO"}>
