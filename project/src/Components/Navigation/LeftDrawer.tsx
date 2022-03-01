@@ -68,6 +68,7 @@ export default function LeftDrawer() {
                         <DetailedListItem title={"SO Review"} to={"/Parser/SO/Review"}>
                             <AgricultureIcon />
                         </DetailedListItem>
+                        <Divider />
                         <DetailedListItem title={"Guider App Review"} to={"/Parser/Guiders/Application"}>
                             <SupportAgentRoundedIcon />
                         </DetailedListItem>
