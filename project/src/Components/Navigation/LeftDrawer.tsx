@@ -4,6 +4,7 @@ import ListItemText from '@mui/material/ListItemText';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
 import ArchitectureRoundedIcon from '@mui/icons-material/ArchitectureRounded';
+import AddReactionRoundedIcon from '@mui/icons-material/AddReactionRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from "react";
 import {Link} from "react-router-dom";
@@ -70,6 +71,9 @@ export default function LeftDrawer() {
                         </DetailedListItem>
                         <Divider />
                         <DetailedListItem title={"Guider App Review"} to={"/Parser/Guiders/Application"}>
+                            <AddReactionRoundedIcon />
+                        </DetailedListItem>
+                        <DetailedListItem title={"Guider Review"} to={"/Parser/Guiders/Review"}>
                             <SupportAgentRoundedIcon />
                         </DetailedListItem>
                         {
