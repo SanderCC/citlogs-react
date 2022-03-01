@@ -2,6 +2,7 @@ import {Divider, IconButton, ListItem, List, SwipeableDrawer, Typography} from "
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from "react";
 import {Link} from "react-router-dom";
@@ -63,9 +64,19 @@ export default function LeftDrawer() {
                         <DetailedListItem title={"SO Review"} to={"/Parser/SO"}>
                             <AgricultureIcon />
                         </DetailedListItem>
-                        <DetailedListItem title={"Admin Review"} to={"/Parser/Admin"}>
-                            <AdminPanelSettings />
+                        <DetailedListItem title={"Guider App Review"} to={"/Parser/Guiders/Application"}>
+                            <SupportAgentRoundedIcon />
                         </DetailedListItem>
+                        {
+                            !isAdminDomain() ? <></> : (
+                                <>
+                                    <Divider />
+                                    <DetailedListItem title={"Admin Review"} to={"/Parser/Admin"}>
+                                        <AdminPanelSettings />
+                                    </DetailedListItem>
+                                </>
+                            )
+                        }
                     </List>
                 </>
             </SwipeableDrawer>
@@ -82,4 +93,9 @@ function DetailedListItem({to, children, title}: { to: string, title: string, ch
             <ListItemText primary={title}/>
         </ListItem>
     )
+}
+
+function isAdminDomain() : boolean {
+    let hostname = window.location.hostname
+    return hostname.includes("admin") || hostname.includes("localhost")
 }
