@@ -1,16 +1,16 @@
 import {Button, Grid, TextField, Typography} from "@mui/material";
 import {useState} from "react";
-import {useDivider} from "../../Functions/Dividers/soDivider";
-import {useClipboard} from "../../Functions/Hooks/Clipboard";
-import {ContentArea} from "../Particles/ContentArea";
-import {numberWithCommas} from "../../Functions/number";
-import soReviewFormat from "../../Functions/Formats/SoReviewFormat";
+import {useDivider} from "../../../Functions/Dividers/soDivider";
+import {useClipboard} from "../../../Functions/Hooks/Clipboard";
+import {ContentArea} from "../../Particles/ContentArea";
+import {numberWithCommas} from "../../../Functions/number";
+import soApplicationFormat from "../../../Functions/Formats/SoApplicationFormat";
 
-export default function SO() {
+export default function SOApplication() {
     const [input, setInput] = useState("")
     const divider = useDivider()
     const clipboard = useClipboard()
-    const format = soReviewFormat(divider.getNick(), divider.getAccount(), divider.events.length, divider.quizzes.length, divider.team.length, divider.getPlaytime())
+    const format = soApplicationFormat(divider.getNick(), divider.getAccount(), divider.team, divider.getPlaytime())
 
     if (divider.loading) return <>Loading...</>
 
@@ -33,8 +33,8 @@ export default function SO() {
         <Button color={"warning"} onClick={async () => setInput(await clipboard.get())}>Paste clipboard</Button>
         <Button onClick={parseClipboard} sx={{mx: 5}}>Parse clipboard</Button>
         <Button color={"secondary"} onClick={executeDivider}>Parse input</Button>
+        <Button color={"success"} sx={{mx:5}} onClick={pasteFormatToClipboard}>Copy Format</Button>
         <TextField sx={{width: "100%", m: 1}} multiline value={format}/>
-        <Button color={"success"} onClick={pasteFormatToClipboard}>Copy Format</Button>
         <Grid container>
             <ContentArea title={"Team"} content={divider.team}/>
             <ContentArea title={"Events"} content={divider.events}/>
