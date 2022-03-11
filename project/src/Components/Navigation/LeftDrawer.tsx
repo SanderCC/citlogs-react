@@ -80,9 +80,12 @@ export default function LeftDrawer() {
                             !isAdminDomain() ? <></> : (
                                 <>
                                     <Divider />
-                                    <DetailedListItem title={"Admin Review"} to={"/Parser/Admin"}>
-                                        <AdminPanelSettings />
-                                    </DetailedListItem>
+                                  <DetailedListItem title={"Admin Review"} to={"/Parser/Admin"}>
+                                    <AdminPanelSettings />
+                                  </DetailedListItem>
+                                  <DetailedListItem title={"Admin Application"} to={"/Parser/Admin/Application"}>
+                                    <AdminPanelSettings />
+                                  </DetailedListItem>
                                 </>
                             )
                         }

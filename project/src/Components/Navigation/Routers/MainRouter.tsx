@@ -6,6 +6,7 @@ import Account from "../../Pages/Account";
 import GuiderReview from "../../Pages/Guiders/Review";
 import GuiderApplication from "../../Pages/Guiders/Application";
 import SOApplication from "../../Pages/StateOfficials/SOApplication";
+import Application from "../../Pages/Staff/Application";
 
 export default function MainRouter() {
     return <Switch>
@@ -13,6 +14,7 @@ export default function MainRouter() {
         <Route path="/Parser/SO/Review" component={SOReview}/>
         <Route path="/Parser/Guiders/Application" component={GuiderApplication}/>
         <Route path="/Parser/Guiders/Review" component={GuiderReview}/>
+        <Route path="/Parser/Admin/Application" component={Application}/>
         <Route path="/Parser/Admin" component={Admin}/>
         <Route path="/Parser/Account" component={Account}/>
         <Route path="/" component={Home}/>
