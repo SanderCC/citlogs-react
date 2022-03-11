@@ -5,7 +5,7 @@ export default function staffApplicationFormat(account:string,
                                           support:number) {
   const defaultValue = "<TO_DO_MANUALLY>"
   let result = ""
-  result += `\n[b]Account:[/b] ${account}`
+  result += `[b]Account:[/b] ${account}`
   result += `\n[b]Punishlog:[/b] ${defaultValue}`
   result += `\n[b]Support chat:[/b] ${support}`
   result += `\n[b]Country chat:[/b] ${country}`

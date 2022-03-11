@@ -39,6 +39,7 @@ export default function Application() {
     <Button color={"success"} onClick={pasteFormatToClipboard}>Copy Format</Button>
     <Grid container>
       <ContentArea title={"Possible Abuse"} content={divider.abuse}/>
+      <ContentArea title={"Possible Behavior Issues"} content={divider.behavior}/>
       <ContentArea title={"Country"} content={divider.country}/>
       <ContentArea title={"Support"} content={divider.sup}/>
     </Grid>
