@@ -39,12 +39,12 @@ export function useDivider() {
     const [staffWarps, setStaffWarps] = useState<string[]>([])
     const [dutyRelated, setDutyRelated] = useState<string[]>([])
 
-    function execute(input : string) {
+    function execute(input : string, month:string) {
         setLoading(true)
         resetArrays()
         const lines = input.split("\n")
         console.log("Parsing "+lines.length+" lines")
-        lines.forEach(assignLine)
+        lines.forEach(e => assignLine(e, month))
 
         setLoginMisc(tempLoginMisc)
         setLogin(tempLogin)
@@ -86,7 +86,9 @@ export function useDivider() {
     return {execute, loading, getPlaytime, getNick, getAccount, loginMisc, bans, jails, mutes, logsFetched, cm, cad, sup, abuse, dutyRelated, citc, getRank}
 }
 
-function assignLine(line:string) {
+function assignLine(line:string,month:string = "") {
+    if(month.length > 0 && !line.substring(0,5).includes(month)) return;
+    console.log(line.substring(0,5))
     if(line.includes(" LOGIN: ")) tempLogin.push(line)
     if(line.includes(" LOGIN MISC: ")) tempLoginMisc.push(line)
     if(line.includes(" QUIT MISC: ")) tempQuitMisc.push(line)
